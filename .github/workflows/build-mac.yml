@@ -22,7 +22,9 @@ jobs:
         run: npm install
 
       - name: Build macOS app (unsigned, universal)
-        run: npm run dist:mac
+        # --publish never: don't let electron-builder auto-publish (the upload
+        # step below does it with a token). Otherwise it errors on missing token.
+        run: npm run dist:mac -- --publish never
         env:
           # Skip code-signing — no Apple Developer account required.
           CSC_IDENTITY_AUTODISCOVERY: "false"
