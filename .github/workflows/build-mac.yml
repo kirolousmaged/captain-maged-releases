@@ -1,0 +1,33 @@
+name: Build macOS App
+
+# Run manually from the Actions tab → "Build macOS App" → "Run workflow".
+# Builds an unsigned universal .dmg on GitHub's free macOS runner and uploads
+# it to the v1.0.0 release. No Mac of your own required.
+on:
+  workflow_dispatch:
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build macOS app (unsigned, universal)
+        run: npm run dist:mac
+        env:
+          # Skip code-signing — no Apple Developer account required.
+          CSC_IDENTITY_AUTODISCOVERY: "false"
+
+      - name: Upload .dmg to the v1.0.0 release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload v1.0.0 dist/*.dmg --clobber

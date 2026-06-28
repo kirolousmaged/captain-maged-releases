@@ -1,0 +1,40 @@
+{
+  "name": "captain-maged-desktop",
+  "version": "1.0.0",
+  "description": "Captain Maged Academy — secure desktop player (screen-capture protected)",
+  "main": "main.js",
+  "author": "Captain Maged Academy",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.5"
+  },
+  "build": {
+    "appId": "com.captainmaged.academy",
+    "productName": "Captain Maged Academy",
+    "directories": { "output": "dist" },
+    "win": {
+      "target": ["nsis", "portable"]
+    },
+    "portable": {
+      "artifactName": "CaptainMaged-Portable-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "CaptainMaged-Setup-${version}.${ext}"
+    },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["universal"] }],
+      "artifactName": "CaptainMaged-${version}.${ext}",
+      "category": "public.app-category.education"
+    }
+  }
+}
