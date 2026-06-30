@@ -1,7 +1,9 @@
 const { app, BrowserWindow, Menu, shell } = require("electron");
+const path = require("path");
 
 // Your live platform — the desktop app simply loads it inside a protected window.
 const SITE_URL = "https://captainmaged.vercel.app";
+const APP_ICON = path.join(__dirname, "build", "icon.png");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -12,6 +14,7 @@ function createWindow() {
     backgroundColor: "#0a0a0a",
     autoHideMenuBar: true,
     title: "Captain Maged Academy",
+    icon: APP_ICON,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,

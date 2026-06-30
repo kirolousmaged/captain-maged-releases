@@ -16,9 +16,10 @@
   "build": {
     "appId": "com.captainmaged.academy",
     "productName": "Captain Maged Academy",
-    "directories": { "output": "dist" },
+    "directories": { "output": "dist", "buildResources": "build" },
     "win": {
-      "target": ["nsis", "portable"]
+      "target": ["nsis", "portable"],
+      "icon": "build/icon.png"
     },
     "portable": {
       "artifactName": "CaptainMaged-Portable-${version}.${ext}"
@@ -34,7 +35,8 @@
     "mac": {
       "target": [{ "target": "dmg", "arch": ["universal"] }],
       "artifactName": "CaptainMaged-${version}.${ext}",
-      "category": "public.app-category.education"
+      "category": "public.app-category.education",
+      "icon": "build/icon.png"
     }
   }
 }
